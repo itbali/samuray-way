@@ -1,4 +1,4 @@
-import express from "express"
+import express, {Request, Response} from "express"
 
 const app = express()
 const port = 3000
@@ -20,10 +20,10 @@ const samurais = [
 	{id: 3, name: "Suzuki"},
 ]
 
-app.get("/", (req, res) => {
+app.get("/", (res: Response) => {
 	res.send("Hello World!")
 })
-app.post("/", (req, res) => {
+app.post("/", (req: Request, res: Response) => {
 	res.status(statusCodes.OK).send({
 		message: "Hello! Samurai created!",
 		method: req.method,
@@ -31,7 +31,7 @@ app.post("/", (req, res) => {
 		query: req.query,
 	})
 })
-app.get("/samurais/", (req, res) => {
+app.get("/samurais/", (req: Request, res: Response) => {
 	let filteredSamurais = samurais;
 	if (req.query.name) {
 		filteredSamurais = samurais.filter((samurai) => {
@@ -40,7 +40,7 @@ app.get("/samurais/", (req, res) => {
 	}
 	res.status(statusCodes.OK).json(filteredSamurais);
 })
-app.get("/samurais/:id", (req, res) => {
+app.get("/samurais/:id", (req: Request, res: Response) => {
 	let foundSamurai = samurais.find((samurai) => {
 		return samurai.id === Number(req.params.id)
 	});
@@ -55,7 +55,7 @@ app.get("/samurais/:id", (req, res) => {
 	)
 })
 
-app.post("/samurais/", (req, res) => {
+app.post("/samurais/", (req: Request, res: Response) => {
 	if (!req.body.name?.trim()) {
 		res.status(statusCodes.BAD_REQUEST).json({
 			message: "Error: Samurai name is required"
@@ -72,12 +72,12 @@ app.post("/samurais/", (req, res) => {
 	})
 })
 
-app.delete("/samurais/", (req, res) => {
+app.delete("/samurais/", (req: Request, res: Response) => {
 	res.status(statusCodes.METHOD_NOT_ALLOWED).json({
 		message: "Method not allowed"
 	})
 })
-app.delete("/samurais/:id", (req, res) => {
+app.delete("/samurais/:id", (req: Request, res: Response) => {
 	console.log(req.params);
 	const foundSamuraiIndex = samurais.findIndex((samurai) => {
 		return samurai.id === Number(req.params.id)
@@ -94,12 +94,12 @@ app.delete("/samurais/:id", (req, res) => {
 	})
 })
 
-app.put("/samurais/", (req, res) => {
+app.put("/samurais/", (res: Response) => {
 	res.status(statusCodes.METHOD_NOT_ALLOWED).json({
 		message: "Method not allowed"
 	})
 })
-app.put("/samurais/:id", (req, res) => {
+app.put("/samurais/:id", (req: Request, res: Response) => {
 	const foundSamuraiIndex = samurais.findIndex((samurai) => {
 		return samurai.id === Number(req.params.id)
 	});
