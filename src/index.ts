@@ -2,7 +2,7 @@ import express, {Request, Response} from "express"
 import * as process from "process";
 
 const app = express()
-const port = process.env.port || 3000
+const port = process.env.PORT || 3001
 
 app.use(express.json())
 
