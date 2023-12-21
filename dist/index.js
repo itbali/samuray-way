@@ -1,11 +1,35 @@
 "use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
+const process = __importStar(require("process"));
 const app = (0, express_1.default)();
-const port = 3000;
+const port = process.env.PORT || 3001;
 app.use(express_1.default.json());
 const statusCodes = {
     OK: 200,
@@ -20,7 +44,7 @@ const samurais = [
     { id: 2, name: "Yamada" },
     { id: 3, name: "Suzuki" },
 ];
-app.get("/", (req, res) => {
+app.get("/", (_req, res) => {
     res.send("Hello World!");
 });
 app.post("/", (req, res) => {
@@ -69,7 +93,7 @@ app.post("/samurais/", (req, res) => {
         samurai: samurais[samurais.length - 1]
     });
 });
-app.delete("/samurais/", (req, res) => {
+app.delete("/samurais/", (_req, res) => {
     res.status(statusCodes.METHOD_NOT_ALLOWED).json({
         message: "Method not allowed"
     });
@@ -90,7 +114,7 @@ app.delete("/samurais/:id", (req, res) => {
         message: `Samurai ${deletedSamurai[0].name} deleted`
     });
 });
-app.put("/samurais/", (req, res) => {
+app.put("/samurais/", (_req, res) => {
     res.status(statusCodes.METHOD_NOT_ALLOWED).json({
         message: "Method not allowed"
     });

@@ -21,8 +21,8 @@ const samurais = [
 	{id: 3, name: "Suzuki"},
 ]
 
-app.get("/", (res: Response) => {
-	res.send("Hello World!")
+app.get("/", (_req:Request,res: Response) => {
+	res.send("Hello Samurai!")
 })
 app.post("/", (req: Request, res: Response) => {
 	res.status(statusCodes.OK).send({
@@ -73,7 +73,7 @@ app.post("/samurais/", (req: Request, res: Response) => {
 	})
 })
 
-app.delete("/samurais/", (req: Request, res: Response) => {
+app.delete("/samurais/", (_req:Request, res: Response) => {
 	res.status(statusCodes.METHOD_NOT_ALLOWED).json({
 		message: "Method not allowed"
 	})
@@ -95,7 +95,7 @@ app.delete("/samurais/:id", (req: Request, res: Response) => {
 	})
 })
 
-app.put("/samurais/", (res: Response) => {
+app.put("/samurais/", (_req:Request, res: Response) => {
 	res.status(statusCodes.METHOD_NOT_ALLOWED).json({
 		message: "Method not allowed"
 	})
