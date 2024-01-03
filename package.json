@@ -6,11 +6,11 @@
   "main": "src/index.ts",
   "scripts": {
     "test": "jest",
-    "mon": "pnpm nodemon --inspect ./dist/index.js",
+    "mon": "pnpm nodemon --inspect ./dist/src/index.js",
     "watch": "pnpm tsc -w",
     "build": "pnpm install && pnpm tsc",
     "dev": "pnpm watch | pnpm mon",
-    "start": "node ./dist/index.js"
+    "start": "node ./dist/src/index.js"
   },
   "keywords": [],
   "author": "",
